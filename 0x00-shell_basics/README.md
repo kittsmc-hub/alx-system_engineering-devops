@@ -10,13 +10,13 @@ File 4-listmorefiles displays current directory contents, including hidden files
 
 File 5-listfilesdigitonly displays current directory contents in long format, with user and group IDs displayed numerically and hidden files.
 
-File 6-firstdirectory creates a script that creates a directory named holberton in the /tmp/ directory.
+File 6-firstdirectory creates a script that creates a directory named my_first_directory in the /tmp/ directory.
 
-File 7-movethatfile moves the file betty from /tmp/ to /tmp/holberton.
+File 7-movethatfile moves the file betty from /tmp/ to /tmp/my_first_directory.
 
 File 8-firstdelete deletes he file betty.
 
-File 9-firstdirdeletion deletes the directory holberton that is in the /tmp directory.
+File 9-firstdirdeletion deletes the directory my_first_directory that is in the /tmp directory.
 
 File 10-back writes a script that changes the working directory to the previous one.
 
