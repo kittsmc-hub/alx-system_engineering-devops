@@ -9,3 +9,4 @@ string_for_replacement="server_name _;\n\trewrite ^\/redirect_me https://www.you
 sudo sed -i "s/server_name _;/$string_for_replacement/" /etc/nginx/sites-enabled/default
 
 sudo service nginx restart
+

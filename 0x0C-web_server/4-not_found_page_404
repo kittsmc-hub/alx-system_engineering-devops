@@ -16,3 +16,4 @@ sudo sed -i "s/listen 80 default_server;/$string_for_replacement/" /etc/nginx/si
 
 # restart the server
 sudo service nginx restart
+
