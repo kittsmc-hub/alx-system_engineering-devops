@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# This script runs the 'whoami' command under the user passed as an argument
+
+# Check if an argument has been passed
+if [ -z "$1" ]; then
+  echo "Please provide a username as an argument."
+  exit 1
+fi
+
+# Check if the specified user exists
+if id "$1" >/dev/null 2>&1; then
+  # Run the whoami command under the specified user
+  su -c "whoami" "$1"
+else
+  echo "User '$1' does not exist."
+  exit 1
+fi
+
