@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+# Configure ufw to block all incoming traffic except SSH, HTTP, and HTTPS
+sudo ufw default deny incoming
+sudo ufw allow ssh
+sudo ufw allow http
+sudo ufw allow https
+
+# Configure ufw to redirect port 8080/TCP to port 80/TCP
+sudo sed -i 's/^\(DEFAULT_FORWARD_POLICY=\).*/\1"ACCEPT"/' /etc/default/ufw
+sudo ufw --force enable
+sudo ufw route allow 8080/tcp
+
