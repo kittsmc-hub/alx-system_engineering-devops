@@ -9,11 +9,11 @@ def number_of_subscribers(subreddit):
     """Return the number of subscribers for a given subreddit"""
 
 
-url = 'https://www.reddit.com/r/{}/about.json'.format(subreddit)
+    url = 'https://www.reddit.com/r/{}/about.json'.format(subreddit)
 
-headers = {'User-Agent': 'Mozilla/5.0'}
-response = requests.get(url, headers=headers, allow_redirects=False)
-if response.status_code == 200:
-    return response.json().get('data', {}).get('subscribers', 0)
-else:
-    return 0
+    headers = {'User-Agent': 'Mozilla/5.0'}
+    response = requests.get(url, headers=headers, allow_redirects=False)
+    if response.status_code == 200:
+        return response.json().get('data', {}).get('subscribers', 0)
+    else:
+        return 0
