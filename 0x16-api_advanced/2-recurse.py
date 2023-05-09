@@ -1,40 +1,32 @@
 #!/usr/bin/python3
-"""Recursively get the titles of all hot articles for a given subreddit"""
+"""recursive function that queries the Reddit API and returns
+ a list containing the titles of all hot articles for a given subreddit. """
 
 import requests
 
 
-def recurse(subreddit, hot_list=None, after=None):
-    """Return a list containing the titles of all hot articles for a given subreddit"""
-
-    if hot_list is None:
-        hot_list = []
-      
-    url = 'https://www.reddit.com/r/{}/hot.json'.format(subreddit)
-    headers = {'User-Agent': 'Mozilla/5.0'}
-    params = {'limit': 100}
-
-    if after:
-        params['after'] = after
-      
-    response = requests.get(url, headers=head, params=para, allow_redirects=False)
- 
-    if response.status_code == 200:
-        data = response.json().get('data', {})
-        children = data.get('children', [])
-        after = data.get('after', None)
-
-        for child in children:
-            title = child.get('data', {}).get('title', '')
-            hot_list.append(title)
-        
-        if after:
-            recurse(subreddit, hot_list, after)
-        
-        return hot_list
-    
-    elif response.status_code == 404:
+def recurse(subreddit, hot_list=[], after="", count=0):
+    """Returns a list of titles of all hot posts on a given subreddit."""
+    url = "https://www.reddit.com/r/{}/hot/.json".format(subreddit)
+    headers = {
+        "User-Agent": "linux:0x16.api.advanced:v1.0.0 (by /u/bdov_)"
+    }
+    params = {
+        "after": after,
+        "count": count,
+        "limit": 100
+    }
+    response = requests.get(url, headers=headers, params=params,
+                            allow_redirects=False)
+    if response.status_code == 404:
         return None
 
-    else:
-        raise Exception('Request failed with status code {}'.format(response.status_code))
+    results = response.json().get("data")
+    after = results.get("after")
+    count += results.get("dist")
+    for c in results.get("children"):
+        hot_list.append(c.get("data").get("title"))
+
+    if after is not None:
+        return recurse(subreddit, hot_list, after, count)
+    return hot_list
