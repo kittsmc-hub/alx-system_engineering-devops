@@ -1,6 +1,5 @@
 #!/usr/bin/python3
-"""Recursively get the titles of all hot articles and prints a sorted count of given words"""
-
+"""Recursively get the title of all hot articles n prints a count of given words"""
 
 import requests
 
@@ -18,7 +17,7 @@ def count_words(subreddit, word_list, count_dict=None, after=None):
     if after:
         params["after"] = after
 
-    response = requests.get(url, headers=headers, params=params, allow_redirects=False)
+    response = requests.get(url, headers=head, params=para, allow_redirects=False)
     if response.status_code != 200:
         return
 
@@ -41,4 +40,3 @@ def count_words(subreddit, word_list, count_dict=None, after=None):
         sorted_list = sorted(count_dict.items(), key=lambda x: (-x[1], x[0]))
         for word, count in sorted_list:
             print(f"{word}: {count}")
-
